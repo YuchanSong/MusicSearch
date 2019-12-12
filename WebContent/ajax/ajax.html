@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax</title>
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="ajax.js"></script>
+</head>
+<body>
+	<h2>음악 검색 프로그램(Ajax)</h2>
+	
+	<form id="form1" onsubmit="return false">
+		<div>
+			<input type="hidden" name="search"/>
+			<input type="text" name="title" id="title" placeholder="노래 제목을 입력해주세요."/>
+			<input type="button" id="btnGetSend" value="목록(GET)"/>
+			<input type="button" id="btnPostSend" value="검색(POST)"/>
+		</div>
+	</form>
+		
+	<div id="result"></div>
+	
+</body>
+</html>

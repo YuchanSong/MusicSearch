@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+        </Console>
+    
+	    <RollingRandomAccessFile name="rootLog"
+			fileName= "C:/logs/root.log"
+			filePattern="C:/logs/$${date:yyyyMMdd}/root.%d{yyyyMMdd}-%i.log.zip"
+			immediateFlush="false" append="false">
+			<PatternLayout pattern="%p %d [%t] [%c] %-15.15M %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</Policies>
+		</RollingRandomAccessFile>
+    
+
+	    <RollingRandomAccessFile name="errorLog"
+			fileName= "C:/logs/root-error.log"
+			filePattern="C:/logs/$${date:yyyyMMdd}/root-error.%d{yyyyMMdd}-%i.log.zip"
+			immediateFlush="false" append="false">
+			<PatternLayout pattern="%p %d [%t] [%c] %-15.15M %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</Policies>
+		</RollingRandomAccessFile>
+		    
+		    
+		 <RollingRandomAccessFile name="testLog"
+			fileName= "C:/logs/root-test.log"
+			filePattern="C:/logs/$${date:yyyyMMdd}/root-test.%d{yyyyMMdd}-%i.log.zip"
+			immediateFlush="false" append="false">
+			<PatternLayout pattern="%p %d [%t] [%c] %-15.15M %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+				<SizeBasedTriggeringPolicy size="50 MB"/>
+			</Policies>
+		</RollingRandomAccessFile>
+		    
+		    
+        <Async name="Async-log">
+			<AppenderRef ref="rootLog" level="info"/>
+		</Async>
+		<Async name="Async-error">
+			<AppenderRef ref="errorLog" level="error"/>
+		</Async>
+		<Async name="Async-test">
+			<AppenderRef ref="testLog" level="debug"/>
+		</Async>
+		
+    </Appenders>
+    
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="Async-log" />
+            <AppenderRef ref="Async-error" />
+        </Root>
+        
+        <Logger name="test.servlet.TestServlet2" level="DEBUG" additivity="false">
+			<AppenderRef ref="Async-test" />
+		</Logger>
+        
+    </Loggers>
+    
+    
+    
+    
+</Configuration>
